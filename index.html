@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivang Aggarwal | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: #7c3aed;
+      border-radius: 20px;
+    }
+
+    .bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(circle at top left, rgba(124,58,237,0.35), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(0,255,255,0.15), transparent 25%),
+        #050816;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(15px);
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #8b5cf6;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      width: 0;
+      height: 2px;
+      background: #8b5cf6;
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 8%;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero {
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .hero-text {
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.4);
+      color: #c4b5fd;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #b8b8c0;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.35s;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      color: white;
+      box-shadow: 0 10px 30px rgba(139,92,246,0.35);
+    }
+
+    .secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+    }
+
+    .hero-card {
+      width: 380px;
+      height: 430px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(#8b5cf6, #06b6d4);
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+    }
+
+    .hero-card h2 {
+      font-size: 8rem;
+      z-index: 2;
+      font-weight: 800;
+      opacity: 0.9;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 70%;
+      height: 5px;
+      border-radius: 20px;
+      background: linear-gradient(90deg,#8b5cf6,#06b6d4);
+      position: absolute;
+      left: 0;
+      bottom: -12px;
+    }
+
+    .skills-grid,
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 30px;
+      transition: 0.35s;
+      backdrop-filter: blur(15px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 50px rgba(139,92,246,0.25);
+    }
+
+    .card h3 {
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      color: #b8b8c0;
+      line-height: 1.7;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .skill-tags span {
+      background: rgba(139,92,246,0.12);
+      border: 1px solid rgba(139,92,246,0.25);
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: #d8ccff;
+      font-size: 0.9rem;
+    }
+
+    .timeline {
+      width: 100%;
+      position: relative;
+      padding-left: 40px;
+      border-left: 3px solid rgba(139,92,246,0.4);
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -52px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #8b5cf6;
+      box-shadow: 0 0 15px #8b5cf6;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item span {
+      color: #8b5cf6;
+      font-weight: 600;
+    }
+
+    .contact-box {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border-radius: 30px;
+      padding: 50px;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-box p {
+      color: #b8b8c0;
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #7b7b85;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width: 980px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-card {
+        width: 100%;
+        max-width: 360px;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+
+    @media(max-width: 600px) {
+      section {
+        padding: 100px 7%;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .contact-box {
+        padding: 35px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<nav>
+  <div class="logo">Shiv<span>ang</span></div>
+
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-text reveal">
+    <div class="tag">Full Stack Developer • Data Analyst • Salesforce • AI/ML</div>
+
+    <h1>
+      Building <span>Modern</span><br>
+      Digital Experiences.
+    </h1>
+
+    <p>
+      I’m Shivang Aggarwal, a Computer Science student passionate about creating high-performance web applications, interactive dashboards, and visually engaging digital experiences using modern technologies.
+    </p>
+
+    <div class="buttons">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn secondary">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-card reveal">
+    <h2>SA</h2>
+  </div>
+</section>
+
+<section id="skills">
+  <div style="width:100%;">
+    <h2 class="section-title reveal">Skills</h2>
+
+    <div class="skills-grid">
+
+      <div class="card reveal">
+        <h3>Frontend Development</h3>
+        <p>Building responsive and modern user interfaces with smooth animations and scalable architecture.</p>
+
+        <div class="skill-tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>ReactJS</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Backend & Databases</h3>
+        <p>Creating backend services and managing databases for scalable web applications.</p>
+
+        <div class="skill-tags">
+          <span>NodeJS</span>
+          <span>MongoDB</span>
+          <span>MySQL</span>
+          <span>ExpressJS</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Data Analytics</h3>
+        <p>Analyzing datasets, generating insights, and creating business-focused visual dashboards.</p>
+
+        <div class="skill-tags">
+          <span>Python</span>
+          <span>Pandas</span>
+          <span>NumPy</span>
+          <span>Tableau</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div style="width:100%;">
+    <h2 class="section-title reveal">Projects</h2>
+
+    <div class="projects-grid">
+
+      <div class="card reveal">
+        <h3>Trendora</h3>
+        <p>
+          Full-stack MERN e-commerce platform with responsive UI, optimized performance, and product management features.
+        </p>
+        <br>
+        <a href="https://trendora.vercel.app/" target="_blank" class="btn secondary">Live Demo</a>
+      </div>
+
+      <div class="card reveal">
+        <h3>Dark Character Network</h3>
+        <p>
+          Interactive visualization tool that maps relationships between characters from Netflix's Dark series.
+        </p>
+        <br>
+        <a href="https://darkudayarora.vercel.app/" target="_blank" class="btn secondary">Live Demo</a>
+      </div>
+
+      <div class="card reveal">
+        <h3>Telecom Churn Analysis</h3>
+        <p>
+          Data analytics project focused on identifying customer churn trends using Python and visualization libraries.
+        </p>
+        <br>
+        <a href="https://github.com/NotTheAsura/telecom-customer-churn-analysis" target="_blank" class="btn secondary">GitHub Repo</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div style="width:100%;">
+    <h2 class="section-title reveal">Experience</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <h3>Data Analyst / Salesforce Developer Intern</h3>
+        <span>Manras Technologies • Jan 2025 – Jul 2025</span>
+        <p style="margin-top:15px; color:#b8b8c0; line-height:1.8;">
+          Developed sales performance analytics dashboards, automated reporting workflows, and generated actionable business insights using Salesforce datasets.
+        </p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <h3>B.E. Computer Science</h3>
+        <span>Thapar Institute of Engineering & Technology</span>
+        <p style="margin-top:15px; color:#b8b8c0; line-height:1.8;">
+          Focused on full-stack development, databases, operating systems, computer networks, and data analytics.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box reveal">
+    <h2>Let’s Build Something Amazing</h2>
+
+    <p>
+      Looking for internships, collaborations, and exciting opportunities in software development, data analytics, and modern web technologies.
+    </p>
+
+    <div class="buttons" style="justify-content:center;">
+      <a href="mailto:shivang293@gmail.com" class="btn primary">Email Me</a>
+      <a href="https://github.com/NotTheAsura" target="_blank" class="btn secondary">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Shivang Aggarwal • Designed with HTML, CSS & JavaScript
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+
+  function revealOnScroll() {
+    reveals.forEach((element) => {
+      const windowHeight = window.innerHeight;
+      const revealTop = element.getBoundingClientRect().top;
+      const revealPoint = 100;
+
+      if (revealTop < windowHeight - revealPoint) {
+        element.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+
+  const heroCard = document.querySelector('.hero-card');
+
+  document.addEventListener('mousemove', (e) => {
+    const x = (window.innerWidth / 2 - e.pageX) / 25;
+    const y = (window.innerHeight / 2 - e.pageY) / 25;
+
+    heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+</script>
+
+</body>
+</html>
