@@ -17,13 +17,14 @@
 
     html {
       scroll-behavior: smooth;
-      /* Ensures when you click a nav link, the section stops BELOW the fixed header */
       scroll-padding-top: 90px; 
+      /* Enable vertical scroll snapping */
+      scroll-snap-type: y mandatory; 
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #050816;
+      background: #09090b; /* Deep premium dark base */
       color: white;
       overflow-x: hidden;
     }
@@ -37,15 +38,71 @@
       border-radius: 20px;
     }
 
+    /* PREMIUM ANIMATED BACKGROUND */
     .bg {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      top: 0; 
+      left: 0;
+      width: 100vw; 
+      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+      background: #09090b;
+    }
+
+    /* Glowing floating orbs */
+    .bg::before, .bg::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.5;
+      animation: float 12s infinite alternate ease-in-out;
+    }
+
+    /* Purple orb */
+    .bg::before {
+      width: 60vw; 
+      height: 60vw;
+      max-width: 600px;
+      max-height: 600px;
+      background: rgba(139, 92, 246, 0.35);
+      top: -10%; 
+      left: -10%;
+    }
+
+    /* Cyan orb */
+    .bg::after {
+      width: 50vw; 
+      height: 50vw;
+      max-width: 500px;
+      max-height: 500px;
+      background: rgba(6, 182, 212, 0.25);
+      bottom: -10%; 
+      right: -10%;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(80px, 50px) scale(1.15); }
+    }
+
+    /* Subtle developer grid overlay */
+    .grid-overlay {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw; 
+      height: 100vh;
       z-index: -1;
-      background:
-        radial-gradient(circle at top left, rgba(124,58,237,0.35), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(0,255,255,0.15), transparent 25%),
-        #050816;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      /* Fades the grid out at the edges */
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     }
 
     nav {
@@ -57,8 +114,8 @@
       justify-content: space-between;
       align-items: center;
       backdrop-filter: blur(15px);
-      background: rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
       z-index: 1000;
     }
 
@@ -101,16 +158,16 @@
       width: 100%;
     }
 
-    /* Removed 100vh here to eliminate empty space */
     section {
+      min-height: 100vh; 
       padding: 80px 8%; 
       display: flex;
       align-items: center;
+      scroll-snap-align: start; 
+      scroll-snap-stop: always; 
     }
 
-    /* Only the Hero section gets the full screen height */
     .hero {
-      min-height: 100vh;
       padding-top: 140px; 
       justify-content: space-between;
       gap: 60px;
@@ -125,7 +182,7 @@
       padding: 10px 18px;
       border-radius: 999px;
       background: rgba(139,92,246,0.15);
-      border: 1px solid rgba(139,92,246,0.4);
+      border: 1px solid rgba(139,92,246,0.3);
       color: #c4b5fd;
       margin-bottom: 20px;
     }
@@ -146,7 +203,7 @@
     .hero-text p {
       font-size: 1.1rem;
       line-height: 1.8;
-      color: #b8b8c0;
+      color: #a1a1aa;
       margin-bottom: 35px;
     }
 
@@ -167,7 +224,7 @@
     .primary {
       background: linear-gradient(135deg, #8b5cf6, #06b6d4);
       color: white;
-      box-shadow: 0 10px 30px rgba(139,92,246,0.35);
+      box-shadow: 0 10px 30px rgba(139,92,246,0.3);
     }
 
     .secondary {
@@ -184,13 +241,13 @@
       width: 380px;
       height: 430px;
       border-radius: 30px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
       transition: transform 0.15s ease-out;
@@ -241,17 +298,18 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
       padding: 30px;
-      transition: transform 0.35s, box-shadow 0.35s;
+      transition: transform 0.35s, box-shadow 0.35s, background 0.35s;
       backdrop-filter: blur(15px);
     }
 
     .card:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 15px 50px rgba(139,92,246,0.25);
+      box-shadow: 0 15px 50px rgba(139,92,246,0.2);
+      background: rgba(255,255,255,0.05);
     }
 
     .card h3 {
@@ -260,7 +318,7 @@
     }
 
     .card p {
-      color: #b8b8c0;
+      color: #a1a1aa;
       line-height: 1.7;
     }
 
@@ -272,7 +330,7 @@
     }
 
     .skill-tags span {
-      background: rgba(139,92,246,0.12);
+      background: rgba(139,92,246,0.1);
       border: 1px solid rgba(139,92,246,0.25);
       padding: 10px 16px;
       border-radius: 999px;
@@ -284,7 +342,7 @@
       width: 100%;
       position: relative;
       padding-left: 40px;
-      border-left: 3px solid rgba(139,92,246,0.4);
+      border-left: 3px solid rgba(139,92,246,0.3);
     }
 
     .timeline-item {
@@ -316,11 +374,12 @@
 
     .contact-box {
       width: 100%;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border-radius: 30px;
       padding: 50px;
       border: 1px solid rgba(255,255,255,0.08);
       text-align: center;
+      backdrop-filter: blur(10px);
     }
 
     .contact-box h2 {
@@ -329,7 +388,7 @@
     }
 
     .contact-box p {
-      color: #b8b8c0;
+      color: #a1a1aa;
       margin-bottom: 30px;
       line-height: 1.8;
     }
@@ -337,8 +396,9 @@
     footer {
       text-align: center;
       padding: 30px;
-      color: #7b7b85;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #71717a;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      scroll-snap-align: end;
     }
 
     /* Scroll Transition Animation */
@@ -360,78 +420,38 @@
 
     /* Staggered Card Delays */
     .skills-grid .card.reveal:nth-child(1),
-    .projects-grid .card.reveal:nth-child(1) {
-      transition-delay: 0.1s;
-    }
-
+    .projects-grid .card.reveal:nth-child(1) { transition-delay: 0.1s; }
     .skills-grid .card.reveal:nth-child(2),
-    .projects-grid .card.reveal:nth-child(2) {
-      transition-delay: 0.22s;
-    }
-
+    .projects-grid .card.reveal:nth-child(2) { transition-delay: 0.22s; }
     .skills-grid .card.reveal:nth-child(3),
-    .projects-grid .card.reveal:nth-child(3) {
-      transition-delay: 0.34s;
-    }
-
-    .timeline .timeline-item.reveal:nth-child(1) {
-      transition-delay: 0.1s;
-    }
-
-    .timeline .timeline-item.reveal:nth-child(2) {
-      transition-delay: 0.25s;
-    }
+    .projects-grid .card.reveal:nth-child(3) { transition-delay: 0.34s; }
+    .timeline .timeline-item.reveal:nth-child(1) { transition-delay: 0.1s; }
+    .timeline .timeline-item.reveal:nth-child(2) { transition-delay: 0.25s; }
 
     @media(max-width: 980px) {
-      h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero {
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .hero-card {
-        width: 100%;
-        max-width: 360px;
-      }
-
-      nav ul {
-        display: none;
-      }
+      h1 { font-size: 3.5rem; }
+      .hero { flex-direction: column; justify-content: center; }
+      .hero-card { width: 100%; max-width: 360px; }
+      nav ul { display: none; }
     }
 
     @media(max-width: 600px) {
-      section {
-        padding: 70px 7%;
-      }
-
-      .hero {
-        padding-top: 120px;
-      }
-
-      h1 {
-        font-size: 2.8rem;
-      }
-
-      .section-title {
-        font-size: 2.2rem;
-      }
-
-      .contact-box {
-        padding: 35px 25px;
-      }
+      section { padding: 70px 7%; }
+      .hero { padding-top: 120px; }
+      h1 { font-size: 2.8rem; }
+      .section-title { font-size: 2.2rem; }
+      .contact-box { padding: 35px 25px; }
     }
   </style>
 </head>
 <body>
 
+<!-- New Animated Background -->
 <div class="bg"></div>
+<div class="grid-overlay"></div>
 
 <nav>
   <div class="logo">Shiv<span>ang</span></div>
-
   <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -474,7 +494,6 @@
       <div class="card reveal">
         <h3>UI Automation</h3>
         <p>Engineering automated UI test scripts using modern frameworks and cross-browser testing.</p>
-
         <div class="skill-tags">
           <span>Playwright</span>
           <span>TypeScript</span>
@@ -486,7 +505,6 @@
       <div class="card reveal">
         <h3>API & Backend Testing</h3>
         <p>Developing comprehensive API testing suites, validating endpoints, and verifying backend logic.</p>
-
         <div class="skill-tags">
           <span>Postman</span>
           <span>Newman</span>
@@ -498,7 +516,6 @@
       <div class="card reveal">
         <h3>QA Methodologies</h3>
         <p>Applying structured testing approaches to identify software defects and ensure system stability.</p>
-
         <div class="skill-tags">
           <span>Manual Testing</span>
           <span>Functional Testing</span>
@@ -519,27 +536,21 @@
 
       <div class="card reveal">
         <h3>Trendora</h3>
-        <p>
-          Full-stack MERN e-commerce platform with responsive UI, optimized performance, and product management features.
-        </p>
+        <p>Full-stack MERN e-commerce platform with responsive UI, optimized performance, and product management features.</p>
         <br>
         <a href="https://trendora.vercel.app/" target="_blank" class="btn secondary">Live Demo</a>
       </div>
 
       <div class="card reveal">
         <h3>RentSolo API Testing</h3>
-        <p>
-          Automated API testing suite using Postman and Newman to validate backend endpoints for the RentSolo analytics dashboard.
-        </p>
+        <p>Automated API testing suite using Postman and Newman to validate backend endpoints for the RentSolo dashboard.</p>
         <br>
         <a href="https://github.com/NotTheAsura/rent-solo-analytics--api-testing-postman-" target="_blank" class="btn secondary">GitHub Repo</a>
       </div>
 
       <div class="card reveal">
         <h3>RentSolo UI Automation</h3>
-        <p>
-          Automated UI testing framework built with Playwright and TypeScript using the Page Object Model (POM) design pattern.
-        </p>
+        <p>Automated UI testing framework built with Playwright and TypeScript using the Page Object Model (POM) pattern.</p>
         <br>
         <a href="https://github.com/NotTheAsura/rentsolo-playwright-typescript" target="_blank" class="btn secondary">GitHub Repo</a>
       </div>
@@ -557,7 +568,7 @@
       <div class="timeline-item reveal">
         <h3>QA Trainee</h3>
         <span>Oriental Outsourcing Consultants • Aug 2026 – Present</span>
-        <p style="margin-top:15px; color:#b8b8c0; line-height:1.8;">
+        <p style="margin-top:15px; color:#a1a1aa; line-height:1.8;">
           Conducting manual, functional, and exploratory testing across web applications. Executing API test cases using Postman and participating in regression and UI testing.
         </p>
       </div>
@@ -565,7 +576,7 @@
       <div class="timeline-item reveal">
         <h3>Data Analyst / Salesforce Developer Intern</h3>
         <span>Manras Technologies • Jan 2025 – Jul 2025</span>
-        <p style="margin-top:15px; color:#b8b8c0; line-height:1.8;">
+        <p style="margin-top:15px; color:#a1a1aa; line-height:1.8;">
           Developed sales performance analytics dashboards, validated data integrity, and performed UI testing on Salesforce reporting modules.
         </p>
       </div>
@@ -608,7 +619,6 @@
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
       } else {
-        // Reset when scrolled past so it re-animates on the next scroll
         entry.target.classList.remove('active');
       }
     });
@@ -621,8 +631,8 @@
   // 3D Tilt Effect on Hero Card
   const heroCard = document.querySelector('.hero-card');
   document.addEventListener('mousemove', (e) => {
-    const x = (window.innerWidth / 2 - e.pageX) / 25;
-    const y = (window.innerHeight / 2 - e.pageY) / 25;
+    const x = (window.innerWidth / 2 - e.pageX) / 35;
+    const y = (window.innerHeight / 2 - e.pageY) / 35;
     heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   });
 </script>
