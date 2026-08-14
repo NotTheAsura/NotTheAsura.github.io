@@ -185,6 +185,7 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.45);
       position: relative;
       overflow: hidden;
+      transition: transform 0.15s ease-out;
     }
 
     .hero-card::before {
@@ -236,7 +237,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
       padding: 30px;
-      transition: 0.35s;
+      transition: transform 0.35s, box-shadow 0.35s;
       backdrop-filter: blur(15px);
     }
 
@@ -332,15 +333,45 @@
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
+    /* Scroll Transition Animation */
     .reveal {
       opacity: 0;
-      transform: translateY(60px);
-      transition: all 1s ease;
+      transform: translateY(50px) scale(0.97);
+      filter: blur(5px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
     }
 
     .reveal.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* Staggered Card Delays */
+    .skills-grid .card.reveal:nth-child(1),
+    .projects-grid .card.reveal:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .skills-grid .card.reveal:nth-child(2),
+    .projects-grid .card.reveal:nth-child(2) {
+      transition-delay: 0.22s;
+    }
+
+    .skills-grid .card.reveal:nth-child(3),
+    .projects-grid .card.reveal:nth-child(3) {
+      transition-delay: 0.34s;
+    }
+
+    .timeline .timeline-item.reveal:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .timeline .timeline-item.reveal:nth-child(2) {
+      transition-delay: 0.25s;
     }
 
     @media(max-width: 980px) {
@@ -551,29 +582,35 @@
 </footer>
 
 <script>
+  // Continuous Intersection Observer for scroll enter/exit transitions
   const reveals = document.querySelectorAll('.reveal');
 
-  function revealOnScroll() {
-    reveals.forEach((element) => {
-      const windowHeight = window.innerHeight;
-      const revealTop = element.getBoundingClientRect().top;
-      const revealPoint = 100;
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.12
+  };
 
-      if (revealTop < windowHeight - revealPoint) {
-        element.classList.add('active');
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        // Reset when scrolled past so it re-animates on the next scroll
+        entry.target.classList.remove('active');
       }
     });
-  }
+  }, observerOptions);
 
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
+  reveals.forEach((element) => {
+    scrollObserver.observe(element);
+  });
 
+  // 3D Tilt Effect on Hero Card
   const heroCard = document.querySelector('.hero-card');
-
   document.addEventListener('mousemove', (e) => {
     const x = (window.innerWidth / 2 - e.pageX) / 25;
     const y = (window.innerHeight / 2 - e.pageY) / 25;
-
     heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   });
 </script>
