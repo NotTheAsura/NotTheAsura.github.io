@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shivang Aggarwal | Portfolio</title>
   
-  <!-- Dynamic SVG Favicon (Purple background with 'SA') -->
+  <!-- Dynamic SVG Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%238b5cf6%22/><text x=%2250%22 y=%2255%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>SA</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,13 +22,13 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 90px; 
-      /* Enable vertical scroll snapping */
+      /* Desktop scroll snapping */
       scroll-snap-type: y mandatory; 
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #09090b; /* Deep premium dark base */
+      background: #09090b; 
       color: white;
       overflow-x: hidden;
     }
@@ -54,7 +54,6 @@
       background: #09090b;
     }
 
-    /* Glowing floating orbs */
     .bg::before, .bg::after {
       content: '';
       position: absolute;
@@ -64,26 +63,18 @@
       animation: float 12s infinite alternate ease-in-out;
     }
 
-    /* Purple orb */
     .bg::before {
-      width: 60vw; 
-      height: 60vw;
-      max-width: 600px;
-      max-height: 600px;
+      width: 60vw; height: 60vw;
+      max-width: 600px; max-height: 600px;
       background: rgba(139, 92, 246, 0.35);
-      top: -10%; 
-      left: -10%;
+      top: -10%; left: -10%;
     }
 
-    /* Cyan orb */
     .bg::after {
-      width: 50vw; 
-      height: 50vw;
-      max-width: 500px;
-      max-height: 500px;
+      width: 50vw; height: 50vw;
+      max-width: 500px; max-height: 500px;
       background: rgba(6, 182, 212, 0.25);
-      bottom: -10%; 
-      right: -10%;
+      bottom: -10%; right: -10%;
       animation-delay: -6s;
     }
 
@@ -92,27 +83,23 @@
       100% { transform: translate(80px, 50px) scale(1.15); }
     }
 
-    /* Subtle developer grid overlay */
     .grid-overlay {
       position: fixed;
-      top: 0; 
-      left: 0;
-      width: 100vw; 
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       z-index: -1;
       background-image: 
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 40px 40px;
-      /* Fades the grid out at the edges */
       mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
       -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     }
 
+    /* NAVIGATION */
     nav {
       position: fixed;
-      top: 0;
-      width: 100%;
+      top: 0; width: 100%;
       padding: 20px 8%;
       display: flex;
       justify-content: space-between;
@@ -127,19 +114,20 @@
       font-size: 1.5rem;
       font-weight: 800;
       color: #fff;
+      z-index: 1001;
     }
 
     .logo span {
       color: #8b5cf6;
     }
 
-    nav ul {
+    .nav-links {
       display: flex;
       gap: 28px;
       list-style: none;
     }
 
-    nav ul li a {
+    .nav-links li a {
       color: white;
       text-decoration: none;
       font-size: 0.95rem;
@@ -147,21 +135,35 @@
       position: relative;
     }
 
-    nav ul li a::after {
+    .nav-links li a::after {
       content: '';
-      width: 0;
-      height: 2px;
+      width: 0; height: 2px;
       background: #8b5cf6;
       position: absolute;
-      left: 0;
-      bottom: -6px;
+      left: 0; bottom: -6px;
       transition: 0.3s;
     }
 
-    nav ul li a:hover::after {
-      width: 100%;
+    .nav-links li a:hover::after { width: 100%; }
+
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 1001;
     }
 
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* SECTIONS */
     section {
       min-height: 100vh; 
       padding: 80px 8%; 
@@ -177,9 +179,7 @@
       gap: 60px;
     }
 
-    .hero-text {
-      max-width: 650px;
-    }
+    .hero-text { max-width: 650px; }
 
     .tag {
       display: inline-block;
@@ -213,7 +213,7 @@
 
     .buttons {
       display: flex;
-      gap: 18px;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
@@ -237,20 +237,15 @@
       background: rgba(255,255,255,0.04);
     }
 
-    .btn:hover {
-      transform: translateY(-5px);
-    }
+    .btn:hover { transform: translateY(-5px); }
 
     .hero-card {
-      width: 380px;
-      height: 430px;
+      width: 380px; height: 430px;
       border-radius: 30px;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(20px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
@@ -260,8 +255,7 @@
     .hero-card::before {
       content: '';
       position: absolute;
-      width: 250px;
-      height: 250px;
+      width: 250px; height: 250px;
       background: linear-gradient(#8b5cf6, #06b6d4);
       border-radius: 50%;
       filter: blur(60px);
@@ -284,17 +278,14 @@
 
     .section-title::after {
       content: '';
-      width: 70%;
-      height: 5px;
+      width: 70%; height: 5px;
       border-radius: 20px;
       background: linear-gradient(90deg,#8b5cf6,#06b6d4);
       position: absolute;
-      left: 0;
-      bottom: -12px;
+      left: 0; bottom: -12px;
     }
 
-    .skills-grid,
-    .projects-grid {
+    .skills-grid, .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 28px;
@@ -330,16 +321,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 20px;
+      margin: 20px 0;
     }
 
     .skill-tags span {
       background: rgba(139,92,246,0.1);
       border: 1px solid rgba(139,92,246,0.25);
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 999px;
       color: #d8ccff;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .timeline {
@@ -357,10 +348,8 @@
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -52px;
-      top: 6px;
-      width: 18px;
-      height: 18px;
+      left: -52px; top: 6px;
+      width: 18px; height: 18px;
       border-radius: 50%;
       background: #8b5cf6;
       box-shadow: 0 0 15px #8b5cf6;
@@ -399,13 +388,37 @@
 
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 40px 30px;
       color: #71717a;
       border-top: 1px solid rgba(255,255,255,0.05);
       scroll-snap-align: end;
     }
 
-    /* Scroll Transition Animation */
+    /* FOOTER SOCIAL ICONS */
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: #71717a;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: #8b5cf6;
+      transform: translateY(-4px);
+    }
+
+    .social-icons svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(50px) scale(0.97);
@@ -422,49 +435,75 @@
       filter: blur(0px);
     }
 
-    /* Staggered Card Delays */
-    .skills-grid .card.reveal:nth-child(1),
-    .projects-grid .card.reveal:nth-child(1) { transition-delay: 0.1s; }
-    .skills-grid .card.reveal:nth-child(2),
-    .projects-grid .card.reveal:nth-child(2) { transition-delay: 0.22s; }
-    .skills-grid .card.reveal:nth-child(3),
-    .projects-grid .card.reveal:nth-child(3) { transition-delay: 0.34s; }
-    .skills-grid .card.reveal:nth-child(4),
-    .projects-grid .card.reveal:nth-child(4) { transition-delay: 0.46s; }
+    .skills-grid .card.reveal:nth-child(1), .projects-grid .card.reveal:nth-child(1) { transition-delay: 0.1s; }
+    .skills-grid .card.reveal:nth-child(2), .projects-grid .card.reveal:nth-child(2) { transition-delay: 0.22s; }
+    .skills-grid .card.reveal:nth-child(3), .projects-grid .card.reveal:nth-child(3) { transition-delay: 0.34s; }
+    .skills-grid .card.reveal:nth-child(4), .projects-grid .card.reveal:nth-child(4) { transition-delay: 0.46s; }
     .timeline .timeline-item.reveal:nth-child(1) { transition-delay: 0.1s; }
     .timeline .timeline-item.reveal:nth-child(2) { transition-delay: 0.25s; }
 
+    /* MOBILE RESPONSIVE UPDATES */
     @media(max-width: 980px) {
+      html { scroll-snap-type: none; }
+      section { scroll-snap-align: none; min-height: auto; padding: 100px 7% 40px; }
+      .hero { min-height: 100vh; padding-top: 140px; }
+
       h1 { font-size: 3.5rem; }
       .hero { flex-direction: column; justify-content: center; }
       .hero-card { width: 100%; max-width: 360px; }
-      nav ul { display: none; }
+      
+      .hamburger { display: flex; }
+      
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%; 
+        width: 100%; height: 100vh;
+        background: rgba(9, 9, 11, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+      }
+
+      .nav-links.active { right: 0; }
+      .nav-links li { margin: 25px 0; }
+      .nav-links li a { font-size: 1.5rem; }
+
+      .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
     }
 
     @media(max-width: 600px) {
-      section { padding: 70px 7%; }
-      .hero { padding-top: 120px; }
       h1 { font-size: 2.8rem; }
       .section-title { font-size: 2.2rem; }
       .contact-box { padding: 35px 25px; }
+      .buttons { justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
 
-<!-- New Animated Background -->
 <div class="bg"></div>
 <div class="grid-overlay"></div>
 
 <nav>
   <div class="logo">Shiv<span>ang</span></div>
-  <ul>
+  
+  <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+
+  <!-- Hamburger Icon -->
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
 
 <section class="hero" id="home">
@@ -482,6 +521,7 @@
 
     <div class="buttons">
       <a href="#projects" class="btn primary">View Projects</a>
+      <a href="Shivang_Aggarwal_QA_Resume.pdf" download class="btn secondary">Download Resume</a>
       <a href="#contact" class="btn secondary">Contact Me</a>
     </div>
   </div>
@@ -496,7 +536,6 @@
     <h2 class="section-title reveal">Skills</h2>
 
     <div class="skills-grid">
-
       <div class="card reveal">
         <h3>UI Automation</h3>
         <p>Engineering automated UI test scripts using modern frameworks and cross-browser testing.</p>
@@ -507,7 +546,6 @@
           <span>Cross-Platform Testing</span>
         </div>
       </div>
-
       <div class="card reveal">
         <h3>API & Backend Testing</h3>
         <p>Developing comprehensive API testing suites, validating endpoints, and verifying backend logic.</p>
@@ -518,7 +556,6 @@
           <span>JSON</span>
         </div>
       </div>
-
       <div class="card reveal">
         <h3>QA Methodologies</h3>
         <p>Applying structured testing approaches to identify software defects and ensure system stability.</p>
@@ -529,7 +566,6 @@
           <span>Mobile (Android)</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -539,35 +575,61 @@
     <h2 class="section-title reveal">Projects</h2>
 
     <div class="projects-grid">
-
       <div class="card reveal">
         <h3>Trendora</h3>
         <p>Full-stack MERN e-commerce platform with responsive UI, optimized performance, and product management features.</p>
-        <br>
+        
+        <!-- Tech Stack Pills added here -->
+        <div class="skill-tags">
+          <span>ReactJS</span>
+          <span>NodeJS</span>
+          <span>MongoDB</span>
+        </div>
+
         <a href="https://trendora.vercel.app/" target="_blank" class="btn secondary">Live Demo</a>
       </div>
-
+      
       <div class="card reveal">
         <h3>RentSolo API Testing</h3>
         <p>Automated API testing suite using Postman and Newman to validate backend endpoints for the RentSolo dashboard.</p>
-        <br>
+        
+        <!-- Tech Stack Pills added here -->
+        <div class="skill-tags">
+          <span>Postman</span>
+          <span>Newman</span>
+          <span>REST APIs</span>
+        </div>
+
         <a href="https://github.com/NotTheAsura/rent-solo-analytics--api-testing-postman-" target="_blank" class="btn secondary">GitHub Repo</a>
       </div>
-
+      
       <div class="card reveal">
         <h3>RentSolo UI Automation</h3>
         <p>Automated UI testing framework built with Playwright and TypeScript using the Page Object Model (POM) pattern.</p>
-        <br>
+        
+        <!-- Tech Stack Pills added here -->
+        <div class="skill-tags">
+          <span>Playwright</span>
+          <span>TypeScript</span>
+          <span>POM</span>
+        </div>
+
         <a href="https://github.com/NotTheAsura/rentsolo-playwright-typescript" target="_blank" class="btn secondary">GitHub Repo</a>
       </div>
-
+      
       <div class="card reveal">
         <h3>RentSolo Android QA</h3>
         <p>Mobile application testing and build verification for RentSolo using Android Studio, logcat debugging, and Gradle wrapper (gradlew).</p>
-        <br>
+        
+        <!-- Tech Stack Pills added here -->
+        <div class="skill-tags">
+          <span>Android Studio</span>
+          <span>Gradle</span>
+          <span>Logcat</span>
+        </div>
+
         <a href="https://github.com/NotTheAsura/rentsolo-android-gradlew" target="_blank" class="btn secondary">GitHub Repo</a>
       </div>
-
     </div>
   </div>
 </section>
@@ -577,7 +639,6 @@
     <h2 class="section-title reveal">Experience</h2>
 
     <div class="timeline">
-
       <div class="timeline-item reveal">
         <h3>QA Trainee</h3>
         <span>Oriental Outsourcing Consultants • Aug 2026 – Present</span>
@@ -585,7 +646,6 @@
           Conducting manual, functional, and exploratory testing across web applications. Executing API test cases using Postman and participating in regression and UI testing.
         </p>
       </div>
-
       <div class="timeline-item reveal">
         <h3>Data Analyst / Salesforce Developer Intern</h3>
         <span>Manras Technologies • Jan 2025 – Jul 2025</span>
@@ -593,7 +653,6 @@
           Developed sales performance analytics dashboards, validated data integrity, and performed UI testing on Salesforce reporting modules.
         </p>
       </div>
-
     </div>
   </div>
 </section>
@@ -614,10 +673,44 @@
 </section>
 
 <footer>
-  © 2026 Shivang Aggarwal • Designed with HTML, CSS & JavaScript
+  <p>© 2026 Shivang Aggarwal • Designed with HTML, CSS & JavaScript</p>
+  
+  <!-- New Social Icons Section -->
+  <div class="social-icons">
+    <!-- Email Icon -->
+    <a href="mailto:shivang293@gmail.com" title="Email" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+    <!-- LinkedIn Icon -->
+    <a href="https://linkedin.com/in/shivangaggarwal" title="LinkedIn" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+    </a>
+    <!-- GitHub Icon -->
+    <a href="https://github.com/NotTheAsura" title="GitHub" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+  </div>
 </footer>
 
 <script>
+  // Mobile Hamburger Menu Logic
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const navItems = document.querySelectorAll('.nav-links li a');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close the menu when a link is clicked
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
   // Continuous Intersection Observer for scroll enter/exit transitions
   const reveals = document.querySelectorAll('.reveal');
 
